@@ -66,13 +66,36 @@ namespace Digi.Examples
 
             MyAPIGateway.Utilities.ShowNotification($"Use() action={actionEnum}; user={user}");
 
-            switch(actionEnum)
+            if (user is IMyCharacter)
             {
-                case UseActionEnum.Manipulate:
-                    MyAPIGateway.Utilities.ShowNotification("Oh you pressed it!");
-                    break;
+                chr = user as IMyCharacter;
 
-                    // ...more cases if needed
+                if (chr != null)
+                {
+
+
+                    switch (actionEnum)
+                    {
+                        case UseActionEnum.Manipulate:
+
+                            MyAPIGateway.Utilities.ShowNotification("Oh you pressed it!");
+
+                            break;
+
+                        case UseActionEnum.OpenInventory:
+
+                            MyAPIGateway.Gui.ShowTerminalPage(MyTerminalPageEnum.Inventory, chr, Owner, false);
+
+                            break;
+                        case UseActionEnum.OpenTerminal:
+
+                            MyAPIGateway.Gui.ShowTerminalPage(MyTerminalPageEnum.ControlPanel, chr, Owner, false);
+
+                            break;
+                            // ...more cases if needed
+                    }
+                }
+
             }
         }
 
